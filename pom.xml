@@ -1,111 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<!-- https://claude.ai/public/artifacts/7e493000-b533-4426-9b30-3ff5e79648bf -->
 
 	<!-- 1. MODEL VERSION (Required) -->
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<!-- 10. PARENT PROJECT (for inheritance) -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.5.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
+
+	<!-- Note: Modules should be specified in the order they are built
+	 Since maker-checker-web depends on maker-checker-app, it should come after it -->
+	<modules>
+		<module>maker-checker-app</module>
+		<module>maker-checker-web</module>
+	</modules>
 
 	<!-- 2. PROJECT COORDINATES (Required)
 	The GAV (GroupId-ArtifactId-Version) that uniquely identifies your project -->
 	<groupId>com.example.testproject</groupId>
 	<artifactId>testproject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<!-- <packaging>jar</packaging>  jar, war, pom, ear, etc. -->
+	<packaging>pom</packaging> <!-- Multi-module project  -->
+	<!-- jar, war, pom, ear, etc. -->
 
 	<!-- 3. PROJECT INFORMATION -->
 	<name>testproject</name>
 	<description>Demo project for Spring Boot</description>
 
 	<!-- 4. ORGANIZATION INFO -->
-	<url/>
+	<url />
 
 	<!-- 5. LICENSES -->
 	<licenses>
-		<license/>
+		<license />
 	</licenses>
 
 	<!-- 6. DEVELOPERS -->
 	<developers>
-		<developer/>
+		<developer />
 	</developers>
-	
+
 	<!-- 7. SCM (Source Control Management) -->
 	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
+		<connection />
+		<developerConnection />
+		<tag />
+		<url />
 	</scm>
 
 	<!-- 12. PROPERTIES -->
 	<properties>
 		<!-- Java version -->
-        <java.version>17</java.version>
-        
+		<java.version>17</java.version>
+		<spring.boot.version>3.5.5</spring.boot.version>
+
 		<!-- <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
          -->
-        <!-- Encoding -->
-        <!-- <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Encoding -->
+		<!-- <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
          -->
-        <!-- Dependency versions -->
-        <!-- <spring.version>6.1.0</spring.version>
+		<!-- Dependency versions -->
+		<!-- <spring.version>6.1.0</spring.version>
         <junit.version>5.10.0</junit.version>
         <mockito.version>5.7.0</mockito.version>
          -->
-        <!-- Plugin versions -->
-        <!-- <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+		<!-- Plugin versions -->
+		<!-- <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version> -->
 	</properties>
 
 	<!-- 13. DEPENDENCY MANAGEMENT (version control for dependencies) -->
-	<!-- <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-framework-bom</artifactId>
-                <version>${spring.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement> -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring.boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 
 	<!-- 14. DEPENDENCIES -->
 	<dependencies>
 		<!-- Compile dependencies -->
-		 <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<!-- version managed by dependencyManagement or parent -->
 		</dependency>
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 
 		<!-- Runtime dependencies -->
 		<dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -130,7 +140,7 @@
 	<!-- 15. BUILD CONFIGURATION -->
 	<build>
 		<!-- Source and resource directories -->
-        <!-- <sourceDirectory>src/main/java</sourceDirectory>
+		<!-- <sourceDirectory>src/main/java</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
         <resources>
             <resource>
@@ -144,10 +154,10 @@
         </resources> -->
 
 		<!-- Final name of the built artifact -->
-        <!-- <finalName>${project.artifactId}-${project.version}</finalName> -->
+		<!-- <finalName>${project.artifactId}-${project.version}</finalName> -->
 
 		<!-- Plugin Management (version control for plugins) -->
-        <!-- <pluginManagement>
+		<!-- <pluginManagement>
 		... 
 		</pluginManagement> -->
 
@@ -155,7 +165,13 @@
 			<!-- Compiler Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.4.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.14.0</version>
 				<configuration>
 					<annotationProcessorPaths>
 						<path>

@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+spring:
+  web:
+    resources:
+      add-mappings: false
+
+logging:
+  level:
+    com.example.makerchecker.web: INFO
